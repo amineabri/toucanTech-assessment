@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Search Page</h1>
+    <form id="searchForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" name="name" id="name">
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Search</button>
+    </form>
+    <div class="row pt-5" id="results">
+        <table id="result" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="module" src="assets/js/search.js"></script>
+<script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

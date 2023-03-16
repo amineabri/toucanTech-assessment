@@ -1,0 +1,16 @@
+/* Bootstrap loading button CSS */
+.btn.loading:before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid white;
+    border-top-color: transparent;
+    animation: spin .75s linear infinite;
+    margin-right: .5rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

@@ -1,0 +1,70 @@
+version: '3.8'
+services:
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    restart: unless-stopped
+    expose:
+      - 9000
+    tty: true
+    volumes:
+      - .:/usr/src/app
+      - ./public:/usr/src/app/public
+    depends_on:
+      - db
+    networks:
+      - app-network
+  webserver:
+    container_name: webserver
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - backend
+    ports:
+      - 8000:80
+    environment:
+      NGINX_FPM_HOST: backend
+      NGINX_ROOT: /usr/src/app/public
+    volumes:
+      - ./public:/usr/src/app/public
+    networks:
+      - app-network
+  db:
+    image: mysql:latest
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - app-network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - '8081:80'
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  my-db:
